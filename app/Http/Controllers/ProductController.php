@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->middleware('auth')->except([
+            'index', 'show'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +43,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -66,7 +77,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
     }
